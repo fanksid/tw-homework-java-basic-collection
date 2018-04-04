@@ -76,7 +76,24 @@ public class Add {
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        int sum = 0;
+        for (Integer integer : arrayList) {
+            if (integer % 2 == 0) {
+                continue;
+            }
+            sum += integer * 3 + 5;
+        }
+        return sum;
+    }
+
+    public List<Integer> getProcessedList(List<Integer> arrayList) {
+        List<Integer> arrayListRtn = new ArrayList<>();
+        for (int i = 1; i < arrayList.size(); i++) {
+            int first  = arrayList.get(i - 1);
+            int second = arrayList.get(i);
+            arrayListRtn.add((first + second) * 3);
+        }
+        return arrayListRtn;
     }
 
     public double getMedianOfEvenIndex(List<Integer> arrayList) {
@@ -96,10 +113,6 @@ public class Add {
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        throw new NotImplementedException();
-    }
-
-    public List<Integer> getProcessedList(List<Integer> arrayList) {
         throw new NotImplementedException();
     }
 }
