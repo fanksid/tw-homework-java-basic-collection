@@ -2,13 +2,16 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Add {
-    public static void main(String[] args) {
-        
-    }
+//    public static void main(String[] args) {
+//
+//    }
     public int getSumOfEvens(int leftBorder, int rightBorder) {
         return getSumOfOddsOrEvens(leftBorder, rightBorder, true);
     }
@@ -53,11 +56,23 @@ public class Add {
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        int sum = 0;
+        for (Integer integer : arrayList) {
+            sum += integer;
+        }
+        return 3 * sum + 2 * arrayList.size();
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        List<Integer> arrayListRtn = new ArrayList<>(arrayList);
+        for (int i = 0; i < arrayListRtn.size(); i++) {
+            int val;
+            if ((val = arrayListRtn.get(i)) % 2 == 0) {
+                continue;
+            }
+            arrayListRtn.set(i, 3 * val + 2);
+        }
+        return arrayListRtn;
     }
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
