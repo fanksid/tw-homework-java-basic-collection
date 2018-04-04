@@ -23,37 +23,22 @@ public class Add {
 
     private int getSumOfOddsOrEvens(int leftBorder, int rightBorder, boolean isGetEvenSum) {
         // make sure that leftBorder <= rightBorder, do this for convenient
-        Integer firstI = leftBorder;
-        Integer lastI = rightBorder;
-        // TODO: remove swapIfFirstGreaterThanSecond(firstI, lastI);
-        swapIfFirstGreaterThanSecond(firstI, lastI);
+        if (leftBorder > rightBorder) {
+            // swap
+            int tmp = leftBorder;
+            leftBorder = rightBorder;
+            rightBorder = tmp;
+        }
         int mod = isGetEvenSum ? 1 : 0;
-        if (firstI % 2 == mod) {
-            firstI++;
+        if (leftBorder % 2 == mod) {
+            leftBorder++;
         }
-        if (lastI % 2 == mod) {
-            lastI--;
+        if (rightBorder % 2 == mod) {
+            rightBorder--;
         }
-        int nEle = (lastI - firstI) / 2 + 1;
+        int nEle = (rightBorder - leftBorder) / 2 + 1;
         // 等差数列求和
-        return (firstI + lastI) * nEle / 2;
-    }
-
-    private void swapIfFirstGreaterThanSecond(Integer fistI, Integer secondI) {
-        if (fistI == null || secondI == null || fistI <= secondI) {
-            return;
-        }
-
-        Class intCl = fistI.getClass();
-        try {
-            Field value = intCl.getDeclaredField("value");
-            value.setAccessible(true);
-            int tmp = fistI;
-            value.setInt(fistI, secondI);
-            value.setInt(secondI, tmp);
-        } catch (NoSuchFieldException | IllegalAccessException  e) {
-            e.printStackTrace();
-        }
+        return (leftBorder + rightBorder) * nEle / 2;
     }
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
