@@ -25,6 +25,7 @@ public class Add {
         // make sure that leftBorder <= rightBorder, do this for convenient
         Integer firstI = leftBorder;
         Integer lastI = rightBorder;
+        // TODO: remove swapIfFirstGreaterThanSecond(firstI, lastI);
         swapIfFirstGreaterThanSecond(firstI, lastI);
         int mod = isGetEvenSum ? 1 : 0;
         if (firstI % 2 == mod) {
@@ -97,11 +98,36 @@ public class Add {
     }
 
     public double getMedianOfEvenIndex(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        List<Integer> arrayListEven = new ArrayList<>();
+        for (Integer integer : arrayList) {
+            if (integer % 2 == 1) {
+                continue;
+            }
+            arrayListEven.add(integer);
+        }
+
+        int size = arrayListEven.size();
+        int lastIndex = size - 1;
+
+        if (size % 2 == 1) {
+            return arrayListEven.get(lastIndex / 2);
+        } else {
+            return (arrayListEven.get(lastIndex / 2) + arrayListEven.get(lastIndex / 2 + 1)) / 2;
+        }
     }
 
     public double getAverageOfEvenIndex(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        int cnt = 0;
+        int sum = 0;
+
+        for (Integer integer : arrayList) {
+            if (integer % 2 == 1) {
+                continue;
+            }
+            cnt++;
+            sum += integer;
+        }
+        return sum / cnt;
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
