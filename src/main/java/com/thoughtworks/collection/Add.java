@@ -1,10 +1,7 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Add {
 //    public static void main(String[] args) {
@@ -41,8 +38,8 @@ public class Add {
 
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
         int sum = 0;
-        for (Integer integer : arrayList) {
-            sum += integer;
+        for (Integer elemI : arrayList) {
+            sum += elemI;
         }
         return 3 * sum + 2 * arrayList.size();
     }
@@ -61,11 +58,11 @@ public class Add {
 
     public int getSumOfProcessedOdds(List<Integer> arrayList) {
         int sum = 0;
-        for (Integer integer : arrayList) {
-            if (integer % 2 == 0) {
+        for (Integer elemI : arrayList) {
+            if (elemI % 2 == 0) {
                 continue;
             }
-            sum += integer * 3 + 5;
+            sum += elemI * 3 + 5;
         }
         return sum;
     }
@@ -82,11 +79,11 @@ public class Add {
 
     public double getMedianOfEvenIndex(List<Integer> arrayList) {
         List<Integer> arrayListEven = new ArrayList<>();
-        for (Integer integer : arrayList) {
-            if (integer % 2 == 1) {
+        for (Integer elemI : arrayList) {
+            if (elemI % 2 == 1) {
                 continue;
             }
-            arrayListEven.add(integer);
+            arrayListEven.add(elemI);
         }
 
         int size = arrayListEven.size();
@@ -103,12 +100,12 @@ public class Add {
         int cnt = 0;
         int sum = 0;
 
-        for (Integer integer : arrayList) {
-            if (integer % 2 == 1) {
+        for (Integer elemI : arrayList) {
+            if (elemI % 2 == 1) {
                 continue;
             }
             cnt++;
-            sum += integer;
+            sum += elemI;
         }
         return sum / cnt;
     }
@@ -118,9 +115,9 @@ public class Add {
         if (specialElment % 2 == 1) {
             return false;
         }
-        // TODO: refactor all foreach variable `integer` to `elementI`
-        for (Integer integer : arrayList) {
-            if (integer.equals(specialElment)) {
+
+        for (Integer elemI : arrayList) {
+            if (elemI.equals(specialElment)) {
                 return true;
             }
         }
@@ -128,6 +125,7 @@ public class Add {
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
+        // 复杂度O(n^2)，如果把arrayList排序后，再取不重复的偶数，可以把复杂度降到O(nlogn)，但是会破坏稳定性
         List<Integer> arrayListUnrepeated = new ArrayList<>();
         for (Integer elemI : arrayList) {
             if (elemI % 2 == 1) {
