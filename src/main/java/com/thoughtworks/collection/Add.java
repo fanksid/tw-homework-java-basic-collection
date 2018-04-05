@@ -4,9 +4,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Add {
 //    public static void main(String[] args) {
@@ -116,14 +114,50 @@ public class Add {
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
-        throw new NotImplementedException();
+        // 对退化的情况进行优化
+        if (specialElment % 2 == 1) {
+            return false;
+        }
+        // TODO: refactor all foreach variable `integer` to `elementI`
+        for (Integer integer : arrayList) {
+            if (integer.equals(specialElment)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        List<Integer> arrayListUnrepeated = new ArrayList<>();
+        for (Integer elemI : arrayList) {
+            if (elemI % 2 == 1) {
+                continue;
+            }
+            if (!arrayListUnrepeated.contains(elemI)) {
+                arrayListUnrepeated.add(elemI);
+            }
+        }
+        return arrayListUnrepeated;
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        throw new NotImplementedException();
+        // TODO: get understand difference between List with ArrayList and their initialization
+        List<Integer> arrayListEven = new ArrayList<>();
+        List<Integer> arrayListOdd = new ArrayList<>();
+
+        for (Integer elemI : arrayList) {
+            if (elemI % 2 == 1) {
+                arrayListOdd.add(elemI);
+            } else {
+                arrayListEven.add(elemI);
+            }
+        }
+
+        arrayListEven.sort(null);
+        arrayListOdd.sort((first, second) -> second - first);
+
+        List<Integer> arrayListRtn = new ArrayList<>(arrayListEven);
+        arrayListRtn.addAll(arrayListOdd);
+        return arrayListRtn;
     }
 }
