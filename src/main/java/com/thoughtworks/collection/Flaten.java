@@ -2,7 +2,7 @@ package com.thoughtworks.collection;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.List;
+import java.util.*;
 
 public class Flaten {
 
@@ -12,10 +12,25 @@ public class Flaten {
     }
 
     public List<Integer> transformToOneDimesional() {
-        throw new NotImplementedException();
+        List<Integer> listOneDimesional = new ArrayList<>();
+        for (Integer[] arr : array) {
+            listOneDimesional.addAll(Arrays.asList(arr));
+        }
+        return listOneDimesional;
     }
 
     public List<Integer> transformToUnrepeatedOneDimesional() {
-        throw new NotImplementedException();
+        // 空间换时间，引入set来降低时间复杂度。
+        List<Integer> listOneDimesional = new ArrayList<>();
+        Set<Integer> setAppeared = new HashSet<>();
+        for (Integer[] arr : array) {
+            for (Integer elemI : arr) {
+                if (!setAppeared.contains(elemI)) {
+                    listOneDimesional.add(elemI);
+                    setAppeared.add(elemI);
+                }
+            }
+        }
+        return listOneDimesional;
     }
 }
