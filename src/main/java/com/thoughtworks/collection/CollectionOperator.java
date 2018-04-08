@@ -1,10 +1,6 @@
 package com.thoughtworks.collection;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class CollectionOperator {
     public List<Integer> getListByInterval(int left, int right) {
@@ -28,7 +24,7 @@ public class CollectionOperator {
         if (last % 2 == 1) {
             last -= toward;
         }
-        int step = toward << 1;
+        int step = toward * 2;
         List<Integer> listEven = new ArrayList<>();
         for (int i = first; i != last; i += step) {
             listEven.add(i);
@@ -39,9 +35,9 @@ public class CollectionOperator {
 
     public List<Integer> popEvenElments(int[] array) {
         List<Integer> listEven = new ArrayList<>();
-        for (int elem : array) {
-            if (elem % 2 == 0) {
-                listEven.add(elem);
+        for (int elemI : array) {
+            if (elemI % 2 == 0) {
+                listEven.add(elemI);
             }
         }
         return listEven;
@@ -71,13 +67,13 @@ public class CollectionOperator {
     }
 
     public List<Integer> addUncommonElement(Integer[] firstArray, Integer[] secondArray) {
-        // 这里不能写成List<Integer> listAddedUncommonElement = Arrays.asList(firstArray);
-        // 因为Arrays.asList()返回的是一个固定大小的list，将无法向里面添加元素
+        // 空间换时间，引入set来引低查找时间
         List<Integer> listAddedUncommonElement = new ArrayList<>(Arrays.asList(firstArray));
+        Set<Integer> setContains = new HashSet<>(Arrays.asList(firstArray));
 
-        // 复杂度O(n^2)，数据量大时，建议用Set降复杂度
         for (Integer elemI : secondArray) {
-            if (!listAddedUncommonElement.contains(elemI)) {
+            if (!setContains.contains(elemI)) {
+                setContains.add(elemI);
                 listAddedUncommonElement.add(elemI);
             }
         }
