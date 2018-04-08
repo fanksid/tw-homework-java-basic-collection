@@ -1,8 +1,8 @@
 package com.thoughtworks.collection;
 
 import javafx.util.Pair;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
@@ -31,8 +31,8 @@ public class Reduce {
         return 1.0 * sum / arrayList.size();
     }
 
-    public double getOrderedMedian() {
-        int size = arrayList.size();
+    private double getMedian(Collection<Integer> collection) {
+        int size = collection.size();
         int lastIndex = size - 1;
         if (size % 2 == 1) {
             return arrayList.get(lastIndex / 2);
@@ -40,10 +40,24 @@ public class Reduce {
             return (arrayList.get(lastIndex / 2) + arrayList.get(lastIndex / 2 + 1)) / 2.0;
         }
     }
+    public double getOrderedMedian() {
+        return getMedian(arrayList);
+    }
 
     //实现接口SingleLink，然后再此函数内使用
     public Double getMedianInLinkList(SingleLink singleLink) {
-        throw new NotImplementedException();
+        // 无法通过测试
+        singleLink = new MySingleLink();
+        for (Integer elemI : arrayList) {
+            singleLink.addTailPointer(elemI);
+        }
+        int size = singleLink.size();
+        int lastIndex = size - 1;
+        if (size % 2 == 1) {
+            return (Integer) singleLink.getNode(lastIndex / 2 + 1) * 1.0;
+        } else {
+            return ((Integer)(singleLink.getNode(lastIndex / 2 + 1)) + (Integer) (singleLink.getNode(lastIndex / 2 + 2))) / 2.0;
+        }
     }
 
     public int getFirstEven() {
