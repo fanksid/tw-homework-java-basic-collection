@@ -1,12 +1,8 @@
 package com.thoughtworks.collection;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Add {
-//    public static void main(String[] args) {
-//
-//    }
     public int getSumOfEvens(int leftBorder, int rightBorder) {
         return getSumOfOddsOrEvens(leftBorder, rightBorder, true);
     }
@@ -45,13 +41,9 @@ public class Add {
     }
 
     public List<Integer> getTripleOfOddAndAddTwo(List<Integer> arrayList) {
-        List<Integer> arrayListRtn = new ArrayList<>(arrayList);
-        for (int i = 0; i < arrayListRtn.size(); i++) {
-            int val;
-            if ((val = arrayListRtn.get(i)) % 2 == 0) {
-                continue;
-            }
-            arrayListRtn.set(i, 3 * val + 2);
+        List<Integer> arrayListRtn = new ArrayList<>();
+        for (Integer elemI : arrayList) {
+            arrayListRtn.add(elemI % 2 == 0 ? elemI : (elemI * 3 + 2));
         }
         return arrayListRtn;
     }
@@ -69,10 +61,16 @@ public class Add {
 
     public List<Integer> getProcessedList(List<Integer> arrayList) {
         List<Integer> arrayListRtn = new ArrayList<>();
-        for (int i = 1; i < arrayList.size(); i++) {
-            int first  = arrayList.get(i - 1);
-            int second = arrayList.get(i);
-            arrayListRtn.add((first + second) * 3);
+        boolean isFirst = true;
+        int preNum = 0;
+        for (Integer elemI : arrayList) {
+            if (isFirst) {
+                preNum = elemI;
+                isFirst = false;
+                continue;
+            }
+            arrayListRtn.add((elemI + preNum) * 3);
+            preNum = elemI;
         }
         return arrayListRtn;
     }
@@ -107,7 +105,7 @@ public class Add {
             cnt++;
             sum += elemI;
         }
-        return sum / cnt;
+        return 1.0 * sum / cnt;
     }
 
     public boolean isIncludedInEvenIndex(List<Integer> arrayList, Integer specialElment) {
@@ -125,13 +123,15 @@ public class Add {
     }
 
     public List<Integer> getUnrepeatedFromEvenIndex(List<Integer> arrayList) {
-        // 复杂度O(n^2)，如果把arrayList排序后，再取不重复的偶数，可以把复杂度降到O(nlogn)，但是会破坏稳定性
+        // 空间换时间，引入set降低查找时间，复杂度O(nlogn)
         List<Integer> arrayListUnrepeated = new ArrayList<>();
+        Set<Integer> setContains = new HashSet<>();
         for (Integer elemI : arrayList) {
             if (elemI % 2 == 1) {
                 continue;
             }
-            if (!arrayListUnrepeated.contains(elemI)) {
+            if (!setContains.contains(elemI)) {
+                setContains.add(elemI);
                 arrayListUnrepeated.add(elemI);
             }
         }
@@ -139,7 +139,6 @@ public class Add {
     }
 
     public List<Integer> sortByEvenAndOdd(List<Integer> arrayList) {
-        // TODO: get understand difference between List with ArrayList and their initialization
         List<Integer> arrayListEven = new ArrayList<>();
         List<Integer> arrayListOdd = new ArrayList<>();
 
@@ -152,7 +151,7 @@ public class Add {
         }
 
         arrayListEven.sort(null);
-        arrayListOdd.sort((first, second) -> second - first);
+        arrayListOdd.sort(Comparator.reverseOrder());
 
         List<Integer> arrayListRtn = new ArrayList<>(arrayListEven);
         arrayListRtn.addAll(arrayListOdd);
