@@ -47,25 +47,24 @@ public class Reduce {
     }
 
     public int getFirstEven() {
-        for (Integer elemI : arrayList) {
-            if (elemI % 2 == 0) {
-                return elemI;
-            }
-        }
-        return -1;
+        Integer rtnI = findFirstEven().getKey();
+        return rtnI == null ? -1 : rtnI;
     }
 
     public int getIndexOfFirstEven() {
-        // 这里不用for(int i = 0; i < arrayList.size(); i++)
-        // 的原因是，arrayList可能使用的是链表实现，链表不支持随机访问，所以链表的get()开销比较大
+        Integer rtnI = findFirstEven().getValue();
+        return rtnI == null ? -1 : rtnI;
+    }
+
+    private Pair<Integer, Integer> findFirstEven() {
         int index = 0;
         for (Integer elemI : arrayList) {
             if (elemI % 2 == 0) {
-                return index;
+                return new Pair<>(elemI, index);
             }
             index++;
         }
-        return -1;
+        return new Pair<>(null, null);
     }
 
     public int getLastOdd() {
