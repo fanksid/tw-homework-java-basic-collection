@@ -1,11 +1,6 @@
 package com.thoughtworks.collection;
 
-import javafx.util.Pair;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class Reduce {
 
@@ -63,34 +58,34 @@ public class Reduce {
     }
 
     public int getFirstEven() {
-        Integer rtnI = findFirstEven().getKey();
+        Integer rtnI = (Integer) findFirstEven()[0];
         return rtnI == null ? -1 : rtnI;
     }
 
     public int getIndexOfFirstEven() {
-        Integer rtnI = findFirstEven().getValue();
+        Integer rtnI = (Integer) findFirstEven()[1];
         return rtnI == null ? -1 : rtnI;
     }
 
-    private Pair<Integer, Integer> findFirstEven() {
+    private Object[] findFirstEven() {
         int index = 0;
         for (Integer elemI : arrayList) {
             if (elemI % 2 == 0) {
-                return new Pair<>(elemI, index);
+                return new Object[]{elemI, index};
             }
             index++;
         }
-        return new Pair<>(null, null);
+        return new Object[]{null, null};
     }
 
     public int getLastOdd() {
-        Integer rtnI = findLastOdd().getKey();
+        Integer rtnI = (Integer) findLastOdd()[0];
         // 返回偶数表示不存在奇数
         return rtnI == null ? 0 : rtnI;
     }
 
     public int getIndexOfLastOdd() {
-        Integer rtnI =findLastOdd().getValue();
+        Integer rtnI = (Integer) findLastOdd()[1];
         return rtnI == null ? -1 : rtnI;
     }
 
@@ -98,17 +93,18 @@ public class Reduce {
      * find last odd in the list
      * @return a Pair, Key means the odd, and the Value means the index
      */
-    private Pair<Integer, Integer> findLastOdd() {
+    private Object[] findLastOdd() {
         int index = arrayList.size() - 1;
         ListIterator<Integer> it = arrayList.listIterator(arrayList.size());
         while (it.hasPrevious()) {
             int elemI = it.previous();
             if (elemI % 2 == 1) {
-                return new Pair<>(elemI, index);
+                return new Object[]{elemI, index};
             }
             index--;
         }
-        return new Pair<>(null, null);
+
+        return new Object[]{null, null};
     }
 
     public boolean isEqual(List<Integer> arrayList) {
