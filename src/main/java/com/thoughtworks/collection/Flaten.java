@@ -20,12 +20,10 @@ public class Flaten {
     public List<Integer> transformToUnrepeatedOneDimesional() {
         // 空间换时间，引入set来降低时间复杂度。
         List<Integer> listOneDimesional = new ArrayList<>();
-        Set<Integer> setAppeared = new HashSet<>();
         for (Integer[] arr : array) {
             for (Integer elemI : arr) {
-                if (!setAppeared.contains(elemI)) {
+                if (!listOneDimesional.contains(elemI)) {
                     listOneDimesional.add(elemI);
-                    setAppeared.add(elemI);
                 }
             }
         }

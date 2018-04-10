@@ -32,6 +32,7 @@ public class Add {
         return (leftBorder + rightBorder) * nEle / 2;
     }
 
+    //todo excellent work! try java 8 lambda!
     public int getSumTripleAndAddTwo(List<Integer> arrayList) {
         int sum = 0;
         for (Integer elemI : arrayList) {

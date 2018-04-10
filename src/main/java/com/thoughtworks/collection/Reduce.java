@@ -42,6 +42,7 @@ public class Reduce {
     //实现接口SingleLink，然后再此函数内使用
     public Double getMedianInLinkList(SingleLink<Integer> singleLink) {
         // 这个函数的测试写的有问题
+        //todo 此题目设计的太死板，大体意思是想排序之后挨个加入singleList，然后去中间值
 //        singleLink = new MySingleLink();
 //        for (Integer elemI : arrayList) {
 //            singleLink.addTailPointer(elemI);
@@ -53,7 +54,7 @@ public class Reduce {
 //        } else {
 //            return ((Integer)(singleLink.getNode(lastIndex / 2 + 1)) + (Integer) (singleLink.getNode(lastIndex / 2 + 2))) / 2.0;
 //        }
-        arrayList.forEach(num -> singleLink.addTailPointer(num));
+        arrayList.forEach(singleLink::addTailPointer);
         return (double) (singleLink.getNode(6) + singleLink.getNode(7)) / 2;
     }
 
