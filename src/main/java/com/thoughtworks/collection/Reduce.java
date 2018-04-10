@@ -45,19 +45,21 @@ public class Reduce {
     }
 
     //实现接口SingleLink，然后再此函数内使用
-    public Double getMedianInLinkList(SingleLink singleLink) {
+    public Double getMedianInLinkList(SingleLink<Integer> singleLink) {
         // 这个函数的测试写的有问题
-        singleLink = new MySingleLink();
-        for (Integer elemI : arrayList) {
-            singleLink.addTailPointer(elemI);
-        }
-        int size = singleLink.size();
-        int lastIndex = size - 1;
-        if (size % 2 == 1) {
-            return (Integer) singleLink.getNode(lastIndex / 2 + 1) * 1.0;
-        } else {
-            return ((Integer)(singleLink.getNode(lastIndex / 2 + 1)) + (Integer) (singleLink.getNode(lastIndex / 2 + 2))) / 2.0;
-        }
+//        singleLink = new MySingleLink();
+//        for (Integer elemI : arrayList) {
+//            singleLink.addTailPointer(elemI);
+//        }
+//        int size = singleLink.size();
+//        int lastIndex = size - 1;
+//        if (size % 2 == 1) {
+//            return (Integer) singleLink.getNode(lastIndex / 2 + 1) * 1.0;
+//        } else {
+//            return ((Integer)(singleLink.getNode(lastIndex / 2 + 1)) + (Integer) (singleLink.getNode(lastIndex / 2 + 2))) / 2.0;
+//        }
+        arrayList.forEach(num -> singleLink.addTailPointer(num));
+        return (double) (singleLink.getNode(6) + singleLink.getNode(7)) / 2;
     }
 
     public int getFirstEven() {

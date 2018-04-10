@@ -73,7 +73,7 @@ public class ReduceTest {
         Reduce reduce = new Reduce(arrayList);
 
         assertThat(reduce.getMedianInLinkList(singleLink)).isEqualTo(9.5);
-        //verify(singleLink, times(12)).addTailPointer(anyInt());
+        verify(singleLink, times(12)).addTailPointer(anyInt());
 
     }
 
