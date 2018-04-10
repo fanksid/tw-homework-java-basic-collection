@@ -46,7 +46,7 @@ public class Reduce {
 
     //实现接口SingleLink，然后再此函数内使用
     public Double getMedianInLinkList(SingleLink singleLink) {
-        // 无法通过测试
+        // 这个函数的测试写的有问题
         singleLink = new MySingleLink();
         for (Integer elemI : arrayList) {
             singleLink.addTailPointer(elemI);
